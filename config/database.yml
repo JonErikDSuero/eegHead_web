@@ -11,7 +11,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: eegHead_web_development
+  database: eeghead_web_development
   pool: 5
   username: root
   password: 
@@ -22,7 +22,7 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: eegHead_web_test
+  database: eeghead_web_test
   pool: 5
   username: root
   password:
@@ -30,7 +30,12 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: eegHead_web_production
+  database: eeghead_web_production
   pool: 5
   username: root
-  password: 6cF7vP54Vn6aR5aH
+  password: 'OBj3ICoNGlKGJ2rG'
+  # Host: 172.17.42.1
+  # Port: 49156
+  # User: 'root'
+  # Password: 'OBj3ICoNGlKGJ2rG'
+  # Database: 'db'
