@@ -10,6 +10,17 @@ Rails.application.routes.draw do
 
     end
 
+
+    namespace :v1 do
+
+      resources :waves do
+        collection do
+          post 'insert'
+        end
+      end
+
+    end
+
   end
 end
 
