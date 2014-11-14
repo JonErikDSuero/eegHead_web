@@ -1,4 +1,4 @@
-class Waves
+class Wave < ActiveRecord::Base
 
   def self.categorize(waves_values)
     waves = {

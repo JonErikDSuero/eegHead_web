@@ -17,6 +17,7 @@ gem 'mini_magick' # ruby wrapper for ImageMagick
 gem 'carrierwave' # file uploader
 gem 'omniauth' # standardized multi-provider authentication
 gem 'omniauth-google-oauth2'
+gem 'd3-rails' # for d3.js: JavaScript library for manipulating documents based on data
 # gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
 # gem 'unicorn' # Use unicorn as the app server
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment

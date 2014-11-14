@@ -5,10 +5,10 @@ class Api::V1::WavesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def insert
-    time = DateTime.parse(params[:timestamp])
-    waves_values = params[:waves_csv].parse_csv
-    waves = Waves.categorize(waves_values)
-    render json: {time: time, waves: waves}
+    timestamp = DateTime.parse(params[:timestamp])
+    wave_values = params[:wave_csv].parse_csv
+    wave = Wave.create(Wave.categorize(wave_values).merge({timestamp: timestamp}))
+    render json: {status: wave.errors.blank?, wave: wave}
   end
 
 end
