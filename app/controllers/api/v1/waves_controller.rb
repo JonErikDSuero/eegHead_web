@@ -11,4 +11,16 @@ class Api::V1::WavesController < ApplicationController
     render json: {status: wave.errors.blank?, wave: wave}
   end
 
+  def graph_points
+    wave_type = params[:wave_type].to_sym
+    waves = Wave.where(user_id: params[:user_id], video_id: params[:video_id])
+    h = {
+      date_min: waves.minimum(:timestamp),
+      date_max: waves.maximum(:timestamp),
+      value_min: waves.minimum(wave_type),
+      value_max: waves.maximum(wave_type)
+    }
+    h.merge!(points: waves.map{|w| [w.timestamp, w.try(wave_type)]})
+    render json: h.merge({status: true})
+  end
 end

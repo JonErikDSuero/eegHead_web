@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :waves do
         collection do
           post 'insert'
+          post 'graph_points'
         end
       end
     end
