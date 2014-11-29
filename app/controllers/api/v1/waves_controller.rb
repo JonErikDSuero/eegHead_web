@@ -14,7 +14,7 @@ class Api::V1::WavesController < ApplicationController
   def graph_points
     wave_type = params[:wave_type].to_sym
     t = Wave.last.timestamp
-    waves = Wave.where(user_id: params[:user_id], video_id: params[:video_id]).where("timestamp > ?", t - 2.minutes)
+    waves = Wave.where(user_id: params[:user_id], video_id: params[:video_id]).where("timestamp > ?", t - 2.minutes).order('timestamp ASC')
     h = {
       date_min: waves.minimum(:timestamp),
       date_max: waves.maximum(:timestamp),
