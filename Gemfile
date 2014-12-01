@@ -22,4 +22,5 @@ gem 'd3-rails' # for d3.js: JavaScript library for manipulating documents based 
 # gem 'unicorn' # Use unicorn as the app server
 # gem 'capistrano-rails', group: :development # Use Capistrano for deployment
 gem 'pry-byebug', group: :development # debugger
+gem 'foundation-rails'
 

@@ -1,5 +1,11 @@
+body {
+	margin: 0;
+	padding: 0;
+}
 
-
+*{
+	box-sizing: border-box;
+}
 
 path {
   stroke: steelblue;
@@ -26,4 +32,41 @@ path {
 .y.axis line, .y.axis path {
   fill: none;
   stroke: #000;
+}
+
+h2 {
+	margin: 0;
+	background-color: #0099cc;
+	color: white;
+	text-align: center;
+	padding: 10px 0;
+}
+
+h4 span{
+	background-color: #237dac;
+	margin: 0;
+	padding: 3px 10px;
+	color: #ECECEC;
+}
+
+h4 {
+	text-align: center;
+	border-top: 2px solid #237dac;
+	margin: 0;
+
+	&.light {
+		background-color: #ECECEC;
+	}
+
+	&.dark {
+		background-color: #CCCCCC;
+	}
+}
+
+.aGraph.light{
+	background-color: #ECECEC;
+}
+
+.aGraph.dark{
+	background-color:#CCCCCC;
 }
