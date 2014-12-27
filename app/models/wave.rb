@@ -1,5 +1,19 @@
 class Wave < ActiveRecord::Base
 
+  def self.types
+    {
+      quality: 'Quality',
+      wave0: 'Delta',
+      wave1: 'High Alpha',
+      wave2: 'High Beta',
+      wave3: 'Low Alpha',
+      wave4: 'Low Beta',
+      wave5: 'Low Gamma',
+      wave6: 'Mid Gamma',
+      wave7: 'Theta',
+    }
+  end
+
   def self.categorize(waves_values)
     waves = {
       quality: waves_values[0],

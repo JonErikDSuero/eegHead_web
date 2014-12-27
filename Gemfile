@@ -13,6 +13,7 @@ gem 'turbolinks' # Turbolinks makes following links in your web application fast
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'sdoc', '~> 0.4.0', group: :doc # bundle exec rake doc:rails generates the API under doc/api.
 gem 'spring', group: :development # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+gem 'puma'
 gem 'mini_magick' # ruby wrapper for ImageMagick
 gem 'carrierwave' # file uploader
 gem 'omniauth' # standardized multi-provider authentication

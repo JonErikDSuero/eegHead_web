@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
 
+
   # API ~~~~~~~~~~~~~~~~~~~~~~~ (start)
   scope module: :api do
 
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :waves do
         collection do
+          get 'updates_stream'
           post 'insert'
           post 'graph_points'
         end

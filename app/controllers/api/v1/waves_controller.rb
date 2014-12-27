@@ -1,6 +1,7 @@
+require 'csv'
+
 class Api::V1::WavesController < ApplicationController
 
-  require 'csv'
 
   skip_before_action :verify_authenticity_token
 
@@ -12,16 +13,48 @@ class Api::V1::WavesController < ApplicationController
   end
 
   def graph_points
-    wave_type = params[:wave_type].to_sym
-    t = Wave.last.timestamp
-    waves = Wave.where(user_id: params[:user_id], video_id: params[:video_id]).where("timestamp > ?", t - 2.minutes).order('timestamp ASC')
-    h = {
-      date_min: waves.minimum(:timestamp),
-      date_max: waves.maximum(:timestamp),
-      value_min: waves.minimum(wave_type),
-      value_max: waves.maximum(wave_type)
-    }
-    h.merge!(points: waves.map{|w| [w.timestamp, w.try(wave_type)]})
-    render json: h.merge({status: true})
+    render json: graph_points_hash(params)
   end
+
+  def updates_stream
+    response.headers['Content-Type'] = 'text/event-stream'
+    sse = ActionController::Live::SSE.new(response.stream, retry: 300, event: "updates_stream")
+    begin
+      Wave.types.keys.each do |wave_type|
+        params[:wave_type] = wave_type
+        params[:user_id] = nil
+        params[:video_id] = nil
+        sse.write(graph_points_hash(params))
+      end
+    rescue IOError
+    ensure
+      sse.close
+    end
+  end
+
+
+  private
+
+  #private
+  def graph_points_hash(params)
+    wave_type = params[:wave_type].to_sym
+    latest_time = Wave.last.timestamp
+    earliest_time = latest_time - 2.minutes
+    waves = Wave.where(
+      user_id: params[:user_id],
+      video_id: params[:video_id],
+      timestamp: earliest_time..latest_time,
+    ).order('timestamp ASC')
+
+    {
+      wave_type: wave_type,
+      date_min: earliest_time,
+      date_max: latest_time,
+      value_min: waves.minimum(wave_type),
+      value_max: waves.maximum(wave_type),
+      points: waves.map{|w| [w.timestamp, w.try(wave_type) || 0]},
+      status: true,
+    }
+  end
+
 end

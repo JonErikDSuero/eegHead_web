@@ -1,37 +1,7 @@
-%h2="Waves Graph"
+%h2="Waves Graphs"
 
-%h4.light 
-	%span Delta
-.aGraph.light{wave_type: "wave0"}
+- Wave.types.each do |wave_type, wave_name|
+  %h4.light
+    %span= "#{wave_name} (#{wave_type.to_s})"
+  .aGraph.light{wave_type: wave_type}
 
-%h4.dark 
-	%span High Alpha
-.aGraph.dark{wave_type: "wave1"}
-
-%h4.light 
-	%span High Beta
-.aGraph.light{wave_type: "wave2"}
-
-%h4.dark 
-	%span Low Alpha
-.aGraph.dark{wave_type: "wave3"}
-
-%h4.light 
-	%span Low Beta
-.aGraph.light{wave_type: "wave4"}
-
-%h4.dark 
-	%span Low Gamma
-.aGraph.dark{wave_type: "wave5"}
-
-%h4.light 
-	%span Mid Gamma
-.aGraph.light{wave_type: "wave6"}
-
-%h4.dark 
-	%span Theta
-.aGraph.dark{wave_type: "wave7"}
-
-%h4.light 
-	%span Signal Strength
-.aGraph.light{wave_type: "quality"}
