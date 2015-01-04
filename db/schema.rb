@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112231821) do
+ActiveRecord::Schema.define(version: 20141231004134) do
 
   create_table "results", force: true do |t|
     t.integer  "attention"
@@ -19,6 +19,22 @@ ActiveRecord::Schema.define(version: 20141112231821) do
     t.integer  "distraction"
     t.integer  "video_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "video_sessions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "video_id"
+    t.string   "state"
+    t.integer  "code",       limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "videos", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -7,3 +7,4 @@ class Site::WavesController < ApplicationController
   end
 
 end
+

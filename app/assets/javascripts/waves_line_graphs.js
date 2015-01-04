@@ -54,3 +54,4 @@ jQuery(document).ready(function() {
     updateLineChart(data, data.wave_type)
   });
 });
+

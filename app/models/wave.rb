@@ -33,3 +33,4 @@ class Wave < ActiveRecord::Base
   end
 
 end
+

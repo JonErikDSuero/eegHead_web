@@ -18,6 +18,13 @@ Rails.application.routes.draw do
           post 'graph_points'
         end
       end
+
+      resources :video_sessions do
+        collection do
+          post 'insert'
+          post 'graph_points'
+        end
+      end
     end
 
   end
@@ -30,6 +37,12 @@ Rails.application.routes.draw do
     resources :waves do
       collection do
         get 'graph'
+      end
+    end
+
+    resources :videos do
+      collection do
+        get 'watch'
       end
     end
 
