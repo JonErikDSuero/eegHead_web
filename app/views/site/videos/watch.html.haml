@@ -1,10 +1,21 @@
 #player_area
   #player{data: {video_id: @video.id, video_code: @video.code, video_session_code: @video_session_code}}
 
-  #sessions
-    - @video.sessions_history.each do |s|
+%ul#videos_list
+  %h4 Videos
+  - Video.all.each do |video|
+    %li
+      - if video.id == @video.id
+        %a.small.button.video.disabled= video.code
+      - else
+        %a.small.button.video{href: "/videos/watch/?id=#{video.id}"}= video.code
+
+%ul#sessions_list
+  %h4 Graphs
+  - @video.sessions.each do |s|
+    %li
       %a.small.button.session{data: {session_code: s[0], reveal_id: "firstModal"}}
-        = s[1].to_s
+        = s[1].strftime("%b %d %H:%M:%S")
 
 #firstModal.reveal-modal.transparent{"data-reveal" => ""}
   #waves_graphs.hide
