@@ -16,23 +16,25 @@ $('.aGraph').each( function(a_graph){
 });
 
 function updateLineChart(data, wave_type){
-  //data.y_min = 0;
-  //data.y_max = 10;
+  if (data.y_min == data.y_max) { // fix if min and max are the same
+    data.y_min = data.y_min-1;
+    data.y_max = data.y_max+1;
+  }
   //data.points = [[1,2], [3,5]];
-  var x = d3.time.scale().domain([0, player.getDuration()]).range([0, w]);
+  var x = d3.time.scale().domain([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 0, player.getDuration())]).range([0, w]);
   var y = d3.scale.linear().domain([data.y_min, data.y_max]).range([h, 0]);
 
   var line = d3.svg.line()
   .x(function(d) {
-    return x( new Date(d[0]) ); // x-coordinate
+    return x( new Date(0, 0, 0, 0, 0, d[0]) ); // x-coordinate
   })
   .y(function(d) {
     return y(d[1]); // y-coordinate
   })
 
-  //var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%H:%M:%S"));
-  var xAxis = d3.svg.axis().scale(x).ticks(4).orient("bottom");
-  var yAxis = d3.svg.axis().scale(y).ticks(4).orient("left");
+  var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%M:%S"), 4);
+  //var xAxis = d3.svg.axis().scale(x).ticks(4).orient("bottom");
+  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(4);
 
   // Draw
   graph[wave_type].append("svg:g")
@@ -50,19 +52,8 @@ function updateLineChart(data, wave_type){
   .attr('d', line(data.points));
 }
 
-// Grab Updates for the Waves using Server Sent Events
-//jQuery(document).ready(function() {
-  //var source = new EventSource('/v1/waves/updates_stream');
-  //source.addEventListener('updates_stream', function(e) {
-    //var data = JSON.parse(e.data);
-    //updateLineChart(data, data.wave_type)
-  //});
-//});
-
-
 //Video Sessions Buttons
 $('body').on('click', '.session', function() {
-  console.log('CLICKED!!');
   params = {
     // the following values are from 'youtube_watch.js'
     video_id: video_id,
@@ -70,7 +61,6 @@ $('body').on('click', '.session', function() {
   }
   $.post('/v1/video_sessions/graph_points', params, function(data){
     for (var wave_type in data){
-      console.log('setting up..')
       updateLineChart(data[wave_type], wave_type)
     }
     $('#waves_graphs').show()
