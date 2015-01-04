@@ -6,8 +6,8 @@ var replays = 0;
 
 function onYouTubePlayerAPIReady() {
   player = new YT.Player('player', {
-    height: '390',
-    width: '640',
+    height: '480',
+    width: '854',
     videoId: video_code,
     events: {
       'onStateChange': onPlayerStateChange

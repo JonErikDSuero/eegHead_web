@@ -1,16 +1,18 @@
-#player{data: {video_id: @video.id, video_code: @video.code, video_session_code: @video_session_code}}
+#player_area
+  #player{data: {video_id: @video.id, video_code: @video.code, video_session_code: @video_session_code}}
 
-#sessions
-  - @video.sessions_history.each do |s|
-    %a.small.button.session{data: {session_code: s[0]}}
-      = s[1].to_s
+  #sessions
+    - @video.sessions_history.each do |s|
+      %a.small.button.session{data: {session_code: s[0], reveal_id: "firstModal"}}
+        = s[1].to_s
 
--#Erik: Change to Modal
-#waves_graphs.hide
-  - Wave.types.each do |wave_type, wave_name|
-    %h4.light
-      %span= "#{wave_name} (#{wave_type.to_s})"
-    .aGraph.light{wave_type: wave_type}
+#firstModal.reveal-modal.transparent{"data-reveal" => ""}
+  #waves_graphs.hide
+    - Wave.types.each do |wave_type, wave_name|
+      %h4.light
+        %span= "#{wave_name} (#{wave_type.to_s})"
+      .aGraph.transparent{wave_type: wave_type}
+  %a.close-reveal-modal ×
 
 %script{src: "http://www.youtube.com/player_api"}
 = javascript_include_tag 'application', 'youtube_watch', 'video_sessions_line_graphs'

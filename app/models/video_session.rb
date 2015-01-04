@@ -12,6 +12,5 @@ class VideoSession < ActiveRecord::Base
     )
   end
 
-
 end
 
