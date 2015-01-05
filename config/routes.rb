@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :waves do
       collection do
         get 'graph'
+        get 'fake_headset'
       end
     end
 

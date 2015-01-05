@@ -1,5 +1,7 @@
 class Wave < ActiveRecord::Base
 
+  attr_accessor :index
+
   def self.types
     {
       quality: 'Quality',

@@ -17,9 +17,9 @@ class Api::V1::VideoSessionsController < ApplicationController
     values = Wave.types.keys.map{|wave_type| [
       wave_type,
       {
-        y_min: waves.minimum(wave_type),
-        y_max: waves.maximum(wave_type),
-        points: waves.each_with_index.map{|w, i| [i, w.try(wave_type) || 0]},
+        y_min: waves.map{|w| w.try(wave_type)}.min,
+        y_max: waves.map{|w| w.try(wave_type)}.max,
+        points: waves.each.map{|w| [w.index, w.try(wave_type) || 0]},
         status: true,
       }
     ]}

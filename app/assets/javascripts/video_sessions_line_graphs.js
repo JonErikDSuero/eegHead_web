@@ -21,7 +21,7 @@ function updateLineChart(data, wave_type){
     data.y_max = data.y_max+1;
   }
   //data.points = [[1,2], [3,5]];
-  var x = d3.time.scale().domain([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 0, player.getDuration())]).range([0, w]);
+  var x = d3.time.scale().domain([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 0, youtube_player.getDuration())]).range([0, w]);
   var y = d3.scale.linear().domain([data.y_min, data.y_max]).range([h, 0]);
 
   var line = d3.svg.line()
