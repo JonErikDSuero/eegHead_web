@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :video_sessions do
         collection do
           post 'insert'
+          post 'delete_all'
           post 'graph_points'
         end
       end

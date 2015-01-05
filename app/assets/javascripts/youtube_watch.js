@@ -29,7 +29,6 @@ function onPlayerStateChange(event) {
     '2': 'paused',
   }
 
-  console.log("STATE: ", states[event.data]);
   if (replays == 1) { return; } // Max number of recorded sessions
 
   params = {
@@ -52,8 +51,11 @@ function onPlayerStateChange(event) {
 
 function createNewSession(code){
   if (created_new_session) { return; }
-  console.log("new SESSION!!");
-  $("ul#sessions_list").append("<li><a class='small button session' data-reveal-id='graphsModal' data-session-code="+code+"> Current </a></li>");
+  buttons_html =  "<li>"
+  buttons_html +=   "<a class='tiny button session' data-reveal-id='graphsModal' data-session-code="+code+"> Current </a>"
+  buttons_html +=   "<a class='tiny secondary button session_delete' data-session-code="+code+"> x </a>"
+  buttons_html += "</li>"
+  $("ul#sessions_list").append(buttons_html);
   created_new_session = true;
 }
 

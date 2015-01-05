@@ -6,16 +6,19 @@
   - Video.all.each do |video|
     %li
       - if video.id == @video.id
-        %a.small.button.video.disabled= video.code
+        %a.tiny.button.video.disabled= video.code
       - else
-        %a.small.button.video{href: "/videos/watch/?id=#{video.id}"}= video.code
+        %a.tiny.button.video{href: "/videos/watch/?id=#{video.id}"}= video.code
 
 %ul#sessions_list
   %h4 Graphs
   - @video.sessions.each do |s|
     %li
-      %a.small.button.session{data: {session_code: s[0], reveal_id: "graphsModal"}}
+      %a.tiny.button.session{data: {session_code: s[0], reveal_id: "graphsModal"}}
         = s[1].strftime("%b %d %H:%M:%S")
+      %a.tiny.secondary.button.session_delete{data: {session_code: s[0]}}
+        x
+
 
 #graphsModal.reveal-modal.transparent{"data-reveal" => ""}
   #waves_graphs.hide

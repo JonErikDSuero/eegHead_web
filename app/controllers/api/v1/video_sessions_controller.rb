@@ -12,7 +12,12 @@ class Api::V1::VideoSessionsController < ApplicationController
     render json: {status: video_session.errors.blank?, video_session: video_session}
   end
 
-  def graph_points # requires: video_id, owner_id
+  def delete_all
+    num_of_deleted = VideoSession.where(code: params[:video_session_code]).delete_all
+    render json: {status: (num_of_deleted > 0)}
+  end
+
+  def graph_points
     waves = VideoSession.waves(params[:video_session_code], params[:user_id])
     values = Wave.types.keys.map{|wave_type| [
       wave_type,

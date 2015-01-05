@@ -55,8 +55,6 @@ function updateLineChart(data, wave_type){
 //Video Sessions Buttons
 $('body').on('click', '.session', function() {
   params = {
-    // the following values are from 'youtube_watch.js'
-    video_id: video_id,
     video_session_code: $(this).data('sessionCode'),
   }
   $.post('/v1/video_sessions/graph_points', params, function(data){
@@ -64,6 +62,20 @@ $('body').on('click', '.session', function() {
       updateLineChart(data[wave_type], wave_type)
     }
     $('#waves_graphs').show()
+  });
+});
+
+$('body').on('click', '.session_delete', function(){
+  console.log('deleting');
+  params = {
+    video_session_code: $(this).data('sessionCode'),
+  }
+  $.post('/v1/video_sessions/delete_all', params, function(data){
+    if (data.status == true){
+      location.reload();
+    } else {
+      alert('Deletion Failed');
+    }
   });
 });
 
