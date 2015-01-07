@@ -16,4 +16,6 @@
 //= require turbolinks
 //= require d3
 
+$(document).foundation();
+
 $(function(){ $(document).foundation(); });
