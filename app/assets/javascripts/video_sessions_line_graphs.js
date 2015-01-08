@@ -1,5 +1,5 @@
 // define dimensions of graph
-var m = [50, 50, 50, 92]; // margins [top, right, bottom, left]
+var m = [50, 50, 50, 117]; // margins [top, right, bottom, left]
 var w = 854; // width
 var h = 480;// height
 var graph = {}
@@ -16,12 +16,18 @@ $('.aGraph').each( function(a_graph){
 });
 
 function updateLineChart(data, wave_type){
+  var video_duration = Math.trunc(youtube_player.getDuration());
+
   if (data.y_min == data.y_max) { // fix if min and max are the same
     data.y_min = data.y_min-1;
     data.y_max = data.y_max+1;
   }
-  //data.points = [[1,2], [3,5]];
-  var x = d3.time.scale().domain([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 0, youtube_player.getDuration())]).range([0, w]);
+
+  data.points = data.points.filter(function(e) { //remove extra data.points
+    return e[0]<=video_duration;
+  });
+
+  var x = d3.time.scale().domain([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 0, video_duration)]).range([0, w]);
   var y = d3.scale.linear().domain([data.y_min, data.y_max]).range([h, 0]);
 
   var line = d3.svg.line()
@@ -33,7 +39,6 @@ function updateLineChart(data, wave_type){
   })
 
   var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%M:%S"), 4);
-  //var xAxis = d3.svg.axis().scale(x).ticks(4).orient("bottom");
   var yAxis = d3.svg.axis().scale(y).orient("left").ticks(4);
 
   // Draw

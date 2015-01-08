@@ -7,12 +7,13 @@ class VideoSession < ActiveRecord::Base
     time0 = nil
     time1 = nil
     time_offset = 0
+    s = 0
     sessions = VideoSession.where(code: code)
 
     sessions.each do |session|
       if session.state == 'playing'
-        # Erik, change 'created_at' to 'timestamp'
-        time0 = session.created_at
+        time0 = session.created_at + s.seconds
+        s = 1 # shift by 1 for the next time ranges
       elsif session.state == 'paused'
         time1 = session.created_at
         waves = Wave.where(user_id: user_id, timestamp: time0..time1)

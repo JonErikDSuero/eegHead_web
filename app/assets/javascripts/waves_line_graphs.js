@@ -1,5 +1,5 @@
 // define dimensions of graph
-var m = [100, 100, 100, 100]; // margins
+var m = [100, 100, 100, 200]; // margins
 var w = 1250 - m[1] - m[3]; // width
 var h = 500 - m[0] - m[2]; // height
 var graph = {}

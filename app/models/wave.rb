@@ -13,6 +13,9 @@ class Wave < ActiveRecord::Base
       wave5: 'Low Gamma',
       wave6: 'Mid Gamma',
       wave7: 'Theta',
+      attention: 'Attention (Native)',
+      meditation: 'Meditation (Native)',
+      blink: 'Blink (Native)',
     }
   end
 
