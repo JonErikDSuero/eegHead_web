@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
+
   get '/auth/:provider/callback', to: 'sessions#create'
 
+  root 'home#index'
 
   # API ~~~~~~~~~~~~~~~~~~~~~~~ (start)
   scope module: :api do
@@ -26,6 +28,13 @@ Rails.application.routes.draw do
           post 'graph_points'
         end
       end
+
+      resources :videos do
+        collection do
+          post 'insert'
+          post 'delete'
+        end
+      end
     end
 
   end
@@ -45,6 +54,8 @@ Rails.application.routes.draw do
     resources :videos do
       collection do
         get 'watch'
+        get 'upload'
+        get 'delete'
       end
     end
 
