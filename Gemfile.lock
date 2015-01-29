@@ -28,11 +28,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (3.5.1)
-      columnize (~> 0.8)
-      debugger-linecache (~> 1.2)
-      slop (~> 3.6)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -46,10 +44,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    columnize (0.8.9)
     d3-rails (3.4.13)
       railties (>= 3.1)
-    debugger-linecache (1.2.0)
+    debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.2.2)
     faraday (0.9.0)
@@ -67,6 +64,7 @@ GEM
     hashie (3.3.1)
     hike (1.2.3)
     i18n (0.6.11)
+    interception (0.5)
     jbuilder (2.2.4)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -109,9 +107,14 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (2.0.0)
-      byebug (~> 3.4)
-      pry (~> 0.10)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
+    pry-rescue (1.4.1)
+      interception (>= 0.5)
+      pry
+    pry-stack_explorer (0.4.9.1)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     puma (2.10.2)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
@@ -193,7 +196,9 @@ DEPENDENCIES
   mysql2
   omniauth
   omniauth-google-oauth2
-  pry-byebug
+  pry-rails
+  pry-rescue
+  pry-stack_explorer
   puma
   rails (= 4.1.0)
   rails_12factor
