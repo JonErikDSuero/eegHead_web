@@ -37,5 +37,88 @@ class Wave < ActiveRecord::Base
     return waves
   end
 
+  def self.process_attention_wave()
+    json_headers = {"Content-Type" => "application/json", "Accept" => "application/json"}
+
+    uri = URI.parse('http://eegheadflask.prombly.com/post_waves')
+
+
+    params = [
+      [
+        0,
+        {
+          id: 2044,
+          timestamp: "2015-01-08T15:16:36.000Z",
+          wave0: 0,
+          wave1: 0,
+          wave2: 0,
+          wave3: 0,
+          wave4: 0,
+          wave5: 0,
+          wave6: 0,
+          wave7: 0,
+          attention: 0,
+          meditation: 0,
+          blink: 0,
+          quality: 0,
+          video_id: nil,
+          user_id: nil,
+          created_at: "2015-01-08T15:16:36.000Z",
+          updated_at: "2015-01-08T15:16:36.000Z"
+        }
+      ],
+      [
+        1,
+        {
+          id: 2045,
+          timestamp: "2015-01-08T15:16:37.000Z",
+          wave0: 2,
+          wave1: 2,
+          wave2: 2,
+          wave3: 2,
+          wave4: 2,
+          wave5: 2,
+          wave6: 2,
+          wave7: 2,
+          attention: 2,
+          meditation: 2,
+          blink: 2,
+          quality: 2,
+          video_id: nil,
+          user_id: nil,
+          created_at: "2015-01-08T15:16:37.000Z",
+          updated_at: "2015-01-08T15:16:37.000Z"
+        }
+      ],
+      [
+        2,
+        {
+          id: 2046,
+          timestamp: "2015-01-08T15:16:39.000Z",
+          wave0: 10,
+          wave1: 10,
+          wave2: 10,
+          wave3: 10,
+          wave4: 10,
+          wave5: 10,
+          wave6: 10,
+          wave7: 10,
+          attention: 10,
+          meditation: 10,
+          blink: 10,
+          quality: 10,
+          video_id: nil,
+          user_id: nil,
+          created_at: "2015-01-08T15:16:39.000Z",
+          updated_at: "2015-01-08T15:16:39.000Z"
+        }
+      ]
+    ]
+
+
+
+    Net::HTTP.new(uri.host, uri.port).post(uri.path, params.to_json, json_headers)
+  end
+
 end
 
