@@ -26,6 +26,13 @@ Rails.application.routes.draw do
           post 'graph_points'
         end
       end
+
+      resources :wave_logs, path: :wavelogs do
+        collection do
+          post 'insert'
+        end
+      end
+
     end
 
   end

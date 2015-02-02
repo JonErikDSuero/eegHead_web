@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231004134) do
+ActiveRecord::Schema.define(version: 20150202024816) do
 
   create_table "results", force: true do |t|
     t.integer  "attention"
@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(version: 20141231004134) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "wave_logs", force: true do |t|
+    t.datetime "timestamp"
+    t.string   "body"
   end
 
   create_table "waves", force: true do |t|
