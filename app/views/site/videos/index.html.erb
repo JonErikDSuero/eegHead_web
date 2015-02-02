@@ -1,0 +1,41 @@
+<% if @videos.any? %>
+  <div class = "row">
+    <h1> Videos List </h1>
+  </div>
+  <div id="player-wrapper"></div>
+
+  <% @videos.in_groups_of(3) do |group| %>
+    <div class="row">
+      <% group.each do |video| %>
+        <% if video %>
+          <div class="large-4 columns">
+            <div class="yt_video thumbnail">
+              <a href="/videos/watch/?id=<%= video.id %>">
+                <%= image_tag "https://img.youtube.com/vi/#{video.code}/mqdefault.jpg",
+                          class: 'yt_preview img-rounded', :"data-uid" => video.code %>
+              </a>
+              <div class="caption">
+                <h5><%= truncate(video.title) %></h5>
+                <p> Duration: <%= video.parse_duration %></p>
+                <p><%= link_to "Delete Video", video, method: :delete, data: {confirm: "You sure?"} %></p>
+                <p><%= link_to "Delete all Video Sessions", "/v1/video_sessions/master_delete_all/?video_id="+video.id.to_s,
+                                method: :delete,
+                                data: {confirm: "Are you sure you want to delete all sessions?"} %> </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <h1>No Videos!</h1>
+<% end %>
+
+<script>
+$(function(){
+  $.post( "/v1/video_sessions/master_delete_all", params, function(data) {
+    console.log("Video Session Inserted: " + data.video_session.code);
+  });
+});
+</script>

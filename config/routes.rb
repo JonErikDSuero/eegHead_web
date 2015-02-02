@@ -26,6 +26,7 @@ Rails.application.routes.draw do
           post 'insert'
           post 'delete_all'
           post 'graph_points'
+          delete 'master_delete_all'
         end
       end
 
@@ -54,8 +55,6 @@ Rails.application.routes.draw do
     resources :videos do
       collection do
         get 'watch'
-        get 'upload'
-        get 'delete'
       end
     end
 
