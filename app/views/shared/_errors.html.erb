@@ -1,15 +1,12 @@
-<% if object.errors.any? %>
-  <div class="panel-error">
-    <div class="panel-heading">
-      <h3>The following errors were found while submitting the form:</h3>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert-box alert round">
+      The following errors were found while submitting the form
     </div>
-
-    <div class="panel-body">
-      <ul>
-        <% object.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>

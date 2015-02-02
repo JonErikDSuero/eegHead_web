@@ -26,4 +26,4 @@ gem 'd3-rails' # for d3.js: JavaScript library for manipulating documents based 
 gem 'pry-byebug', group: :development # debugger
 gem 'foundation-rails'
 gem 'youtube_it', '~>2.4.0'
-gem 'jquery-rails'
+gem 'bcrypt',               '3.1.7'

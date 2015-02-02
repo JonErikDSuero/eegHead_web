@@ -1,0 +1,26 @@
+<% provide(:title, 'Sign up') %>
+<div class="row">
+  <h1 style="text-align:center">Sign Up</h1>
+</div>
+
+<div class="row">
+  <div class="large-6 large-centered columns">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/errors' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Password Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Create my account", class: "button success radius expand" %>
+    <% end %>
+  </div>
+</div>
