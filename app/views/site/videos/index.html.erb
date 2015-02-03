@@ -17,10 +17,12 @@
               <div class="caption">
                 <h5><%= truncate(video.title) %></h5>
                 <p> Duration: <%= video.parse_duration %></p>
+                <% if current_user && current_user.professor? %>
                 <p><%= link_to "Delete Video", video, method: :delete, data: {confirm: "You sure?"} %></p>
                 <p><%= link_to "Delete all Video Sessions", "/v1/video_sessions/master_delete_all/?video_id="+video.id.to_s,
                                 method: :delete,
                                 data: {confirm: "Are you sure you want to delete all sessions?"} %> </p>
+                <% end %>
               </div>
             </div>
           </div>
