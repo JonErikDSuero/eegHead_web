@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20150203005518) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.boolean  "professor"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "professor",       default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.string   "remember_digest"
   end
@@ -47,9 +47,14 @@ ActiveRecord::Schema.define(version: 20150203005518) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "duration"
-    t.string   "title"
+    t.integer  "duration",   default: 0
+    t.string   "title",      default: "Unknown"
     t.string   "link"
+  end
+
+  create_table "wave_logs", force: true do |t|
+    t.datetime "timestamp"
+    t.string   "body"
   end
 
   create_table "waves", force: true do |t|
