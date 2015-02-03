@@ -1,0 +1,25 @@
+<div class="row">
+  <h1 style="text-align:center">Edit User Settings</h1>
+</div>
+
+<div class="row">
+  <div class="large-6 large-centered columns">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/errors', object: @user %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "Save changes", class: "button" %>
+    <% end %>
+  </div>
+</div>

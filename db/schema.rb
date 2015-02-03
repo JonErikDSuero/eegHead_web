@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202024816) do
+ActiveRecord::Schema.define(version: 20150203005518) do
 
   create_table "results", force: true do |t|
     t.integer  "attention"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20150202024816) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "professor",       default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "password_digest"
+    t.string   "remember_digest"
   end
 
   create_table "video_sessions", force: true do |t|
@@ -37,6 +47,9 @@ ActiveRecord::Schema.define(version: 20150202024816) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "duration",   default: 0
+    t.string   "title",      default: "Unknown"
+    t.string   "link"
   end
 
   create_table "wave_logs", force: true do |t|

@@ -1,5 +1,7 @@
 class VideoSession < ActiveRecord::Base
 
+  belongs_to :video
+
   validates_presence_of :video_id, :state, :code
 
   def self.waves(code, user_id) # Erik, refactor, messy code
@@ -32,4 +34,3 @@ class VideoSession < ActiveRecord::Base
   end
 
 end
-

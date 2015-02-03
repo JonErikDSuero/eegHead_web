@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
 
+  root 'home#index'
 
   # API ~~~~~~~~~~~~~~~~~~~~~~~ (start)
   scope module: :api do
@@ -24,6 +25,14 @@ Rails.application.routes.draw do
           post 'insert'
           post 'delete_all'
           post 'graph_points'
+          delete 'master_delete_all'
+        end
+      end
+
+      resources :videos do
+        collection do
+          post 'insert'
+          post 'delete'
         end
       end
 
@@ -57,6 +66,18 @@ Rails.application.routes.draw do
 
   end
   # SITE ~~~~~~~~~~~~~~~~~~~~~~~ (end)
+
+  # SESSIONS ~~~~~~~~~~~~~~~~~~~ (start)
+
+  resources :users
+
+  get 'signup' => 'users#new'
+  get 'login'  => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+
+  # SESSIONS ~~~~~~~~~~~~~~~~~~~ (end)
 
 end
 

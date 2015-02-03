@@ -1,0 +1,23 @@
+<div class="row">
+  <h1>New video</h1>
+
+  <%= form_for @video do |f| %>
+    <% render 'shared/errors', object: @video %>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :link %>
+        <%= f.text_field :link, class: "large12.columns", required: true %>
+        <div class="panel">
+          A link to the video on Youtube.
+        </div>
+
+        <%= f.submit class: "button success" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+
+</script>

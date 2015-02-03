@@ -1,0 +1,35 @@
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to "EEGHEAD", root_path %></a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <% if current_user && current_user.professor? %>
+    <ul class="left">
+      <li><%= link_to "Add New Video", new_video_path %> </li>
+    </ul>
+    <% end %>
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li><%= link_to "Videos", videos_path %> </li>
+      <% if logged_in? %>
+      <li><%= link_to "Profile", current_user %></a></li>
+      <li class="has-dropdown"><a href="#">Account</a>
+        <ul class="dropdown">
+          <li><label><%= current_user.name %></label></li>
+          <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+          <li><%= link_to "Graphs", graph_waves_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Logout", logout_path, method: "delete" %></a></li>
+          <li class="divider"></li>
+        </ul>
+      </li>
+      <% else %>
+        <li><%= link_to "Log in", login_path %>
+      <% end %>
+    </ul>
+  </section>
+</nav>
