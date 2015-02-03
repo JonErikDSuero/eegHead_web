@@ -38,7 +38,9 @@ Rails.application.routes.draw do
 
       resources :wave_logs, path: :wavelogs do
         collection do
+          get 'all'
           post 'insert'
+          post 'waves'
         end
       end
 
