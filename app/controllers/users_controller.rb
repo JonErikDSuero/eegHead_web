@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :correct_user, only: [:show, :edit, :update]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    redirect_to videos_url
   end
 
   # GET /users/1
@@ -21,16 +21,17 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
   # POST /users.json
   def create
-    debugger
     @user = User.new(user_params)
     if @user.save
+      log_in @user
       flash[:success] = "Succesfully Created!"
-      redirect_to videos_url
+      redirect_back_or(videos_url)
     else
       render 'new'
     end

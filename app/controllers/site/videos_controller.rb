@@ -2,6 +2,8 @@ class Site::VideosController < ApplicationController
 
   skip_before_action :verify_authenticity_token
 
+  before_action :is_professor, only: [:new, :create, :destroy]
+
   def index
     @videos = Video.order('created_at DESC')
   end
@@ -34,6 +36,10 @@ class Site::VideosController < ApplicationController
   private
     def user_params
       params.require(:video).permit(:link)
+    end
+
+    def is_professor
+      redirect_to videos_url unless current_user.professor?
     end
 
 end

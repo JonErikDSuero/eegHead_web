@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
     <% flash.each do |key, value| %>
       <div data-alert class="alert-box <%= key %>">
         <%= value %>

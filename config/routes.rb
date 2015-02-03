@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-
-  resources :users
-
   get '/auth/:provider/callback', to: 'sessions#create'
 
   root 'home#index'
@@ -62,6 +59,18 @@ Rails.application.routes.draw do
 
   end
   # SITE ~~~~~~~~~~~~~~~~~~~~~~~ (end)
+
+  # SESSIONS ~~~~~~~~~~~~~~~~~~~ (start)
+
+  resources :users
+
+  get 'signup' => 'users#new'
+  get 'login'  => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+
+  # SESSIONS ~~~~~~~~~~~~~~~~~~~ (end)
 
 end
 
