@@ -4,11 +4,12 @@
 %ul#videos_list
   %h4 Videos
   - Video.all.each do |video|
+    - title = truncate(video.title, length: 20)
     %li
       - if video.id == @video.id
-        %a.tiny.button.video.disabled= video.code
+        %a.tiny.button.video.disabled= title
       - else
-        %a.tiny.button.video{href: "/videos/watch/?id=#{video.id}"}= video.code
+        %a.tiny.button.video{href: "/videos/watch/?id=#{video.id}"}= title
 
 %ul#sessions_list
   %h4 Graphs
