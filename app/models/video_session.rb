@@ -22,7 +22,7 @@ class VideoSession < ActiveRecord::Base
         waves.each do |wave|
           wave.index = (wave.timestamp - time0 + time_offset).to_i
         end
-        time_offset = waves.last.index + 1
+        time_offset = 0 #waves.last.index + 1 - Erik, fix later
         all_waves += waves
       end
     end
