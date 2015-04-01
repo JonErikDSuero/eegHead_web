@@ -5,7 +5,7 @@ class Site::VideosController < ApplicationController
   before_action :is_professor, only: [:new, :create, :destroy]
 
   def index
-    @videos = Video.order('created_at DESC')
+    @videos_list = Video.order('created_at DESC').group_by{|v| v.course_id}
   end
 
   def watch
