@@ -105,6 +105,12 @@ h4 {
   position: fixed;
   list-style: none;
   margin: 0;
+  height: 90%;
+  overflow-y: scroll;
+}
+
+#videos_list li.video_thumb {
+  width: 200px;
 }
 
 #videos_list li a{

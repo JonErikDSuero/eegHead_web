@@ -20,6 +20,14 @@ class Site::VideosController < ApplicationController
     @video_session_code = ((Time.now.to_i + SecureRandom.random_number)*10e6).to_i # unique
     @video = Video.find(params[:id] || 1)
     @students_session_codes = @video.video_sessions.where(state: "playing").pluck(:code).uniq
+
+    if current_user.present?
+      course_ids = current_user.courses.pluck(:id)
+    else
+      course_ids = Course.all.pluck(:id)
+    end
+
+    @videos_list = Video.where(course_id: course_ids).order('created_at DESC').group_by{|v| v.course_id}
   end
 
   def new
