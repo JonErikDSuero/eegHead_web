@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  root 'home#index'
+  root 'site/videos#index'
 
   # API ~~~~~~~~~~~~~~~~~~~~~~~ (start)
   scope module: :api do
