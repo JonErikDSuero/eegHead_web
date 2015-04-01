@@ -1,5 +1,5 @@
 <div class="row">
-  <h1 style="text-align:center">Edit User Settings</h1>
+  <h1 style="text-align:center">Profile</h1>
 </div>
 
 <div class="row">
@@ -18,6 +18,14 @@
 
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      Courses
+      <br/>
+      <% for course in @courses %>
+        <%= check_box_tag "course_ids[]", course.id, @user.courses.include?(course) %>
+        <%= course.complete_name %>
+        <br/>
+      <% end %>
 
       <%= f.submit "Save changes", class: "button" %>
     <% end %>

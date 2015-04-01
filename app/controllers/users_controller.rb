@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @courses = Course.all
   end
 
   # POST /users
@@ -40,9 +41,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    courses = Course.where(id: params[:course_ids])
     if @user.update(user_params)
+      @user.courses = courses
       flash[:success] = "Profile updated"
-      redirect_to @user
+      redirect_to '/videos'
     else
       render 'edit'
     end
