@@ -19,7 +19,7 @@ class Site::VideosController < ApplicationController
     end
     @video_session_code = ((Time.now.to_i + SecureRandom.random_number)*10e6).to_i # unique
     @video = Video.find(params[:id] || 1)
-    @students_sessions = @video.video_sessions.where(state: "playing")
+    @students_session_codes = @video.video_sessions.where(state: "playing").pluck(:code).uniq
   end
 
   def new

@@ -41,7 +41,8 @@
       %span= "Average"
     .aGraph.average.transparent
 
-    - @students_sessions.each do |session|
+    - @students_session_codes.each do |session_code|
+      - session = VideoSession.where(code: session_code, state: "playing").first
       %h4.light
         %span= session.try(:user).try(:name).present? ? session.user.name : "Anonymous"
       .aGraph.student.transparent{student_code: session.code}
