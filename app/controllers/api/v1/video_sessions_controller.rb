@@ -7,7 +7,7 @@ class Api::V1::VideoSessionsController < ApplicationController
       user_id: params[:user_id],
       video_id: params[:video_id],
       state: params[:video_session_state],
-      code: params[:video_session_code].to_i*100 + params[:replays].to_i, # unique
+      code: params[:video_session_code] #.to_i*100 + params[:replays].to_i, # unique
     )
     render json: {status: video_session.errors.blank?, video_session: video_session}
   end

@@ -1,4 +1,5 @@
 var youtube_player;
+var youtube_state;
 
 var user_id = $('#player').data('userId');
 var video_id = $('#player').data('videoId');
@@ -41,14 +42,17 @@ function onPlayerStateChange(event) {
     replays: replays,
   }
 
+  youtube_state = states[event.data];
+  console.log("changing::"+youtube_state);
+
   if (params['video_session_state'] == 'paused') {
-    createNewSession(video_session_code.toString() + ("0" + replays).slice(-2));
+    createNewSession(video_session_code.toString());
   } else if (params['video_session_state'] == 'ended') {
     replays++;
   }
 
   $.post( "/v1/video_sessions/insert", params, function(data) {
-    console.log("Video Session Inserted: " + data.video_session.code);
+    console.log("Video Session Inserted: " + params["video_session_code"]);
   });
 }
 

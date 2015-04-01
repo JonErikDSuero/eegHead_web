@@ -59,7 +59,6 @@ function updateLineChart(data, wave_type){
 
 //Video Sessions Buttons
 $('body').on('click', '.personal .session', function() {
-  console.log("PERSONAL!!!");
   params = {
     video_session_code: $(this).data('sessionCode'),
   }
@@ -78,12 +77,34 @@ $('body').on('click', '.session_delete', function(){
   params = {
     video_session_code: $(this).data('sessionCode'),
   }
+
+  if (params["video_session_code"] == ""){
+    location.reload();
+  }
+
   $.post('/v1/video_sessions/delete_all', params, function(data){
-    if (data.status == true){
-      location.reload();
-    } else {
-      alert('Deletion Failed');
-    }
+    location.reload();
   });
 });
 
+
+$(window).on("blur focus", function(e) {
+  var prevType = $(this).data("prevType");
+
+  if (prevType != e.type) {   //  reduce double fire issues
+    switch (e.type) {
+      case "blur":
+        //console.log("BLUR");
+        //console.log(document.activeElement);
+        if (document.activeElement.tagName == "BODY") {
+          console.log(youtube_state);
+          if (youtube_state == 'playing') {
+            $('#resetModal').foundation('reveal', 'open');
+          }
+        }
+      break;
+    }
+  }
+
+  $(this).data("prevType", e.type);
+})

@@ -48,6 +48,15 @@
   %a.close-reveal-modal ×
 
 
+#resetModal.reveal-modal{"data-reveal" => ""}
+  %h4.light
+    %span= "Your Viewing Experience was Interrupted"
+
+  - sc = @video.sessions(current_user.id).try(:last).try(:first) || @video_session_code
+  %a.button.alert.resetBtn.session_delete{data: {session_code: sc}}
+    = "Please click to Reset #{sc}"
+  %a.close-reveal-modal ×
+
 
 %script{src: "http://www.youtube.com/player_api"}
 = javascript_include_tag 'application', 'youtube_watch', 'video_sessions_line_graphs', 'students_line_graphs'
