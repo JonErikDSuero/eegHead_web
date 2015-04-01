@@ -15,10 +15,10 @@ class VideoSession < ActiveRecord::Base
 
     sessions.each do |session|
       if session.state == 'playing'
-        time0 = session.created_at + s.seconds
+        time0 = session.created_at + s.seconds - 4.hours
         s = 1 # shift by 1 for the next time ranges
       elsif session.state == 'paused'
-        time1 = session.created_at
+        time1 = session.created_at - 4.hours
         waves = Wave.where(timestamp: time0..time1)
         waves.each do |wave|
           wave.index = (wave.timestamp - time0 + time_offset).to_i
