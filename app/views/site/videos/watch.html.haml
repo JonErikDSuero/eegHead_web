@@ -37,10 +37,14 @@
 
 #studentsModal.reveal-modal.transparent{"data-reveal" => ""}
   #waves_graphs.hide
+    %h4.light
+      %span= "Average"
+    .aGraph.average.transparent
+
     - @students_sessions.each do |session|
       %h4.light
         %span= session.try(:user).try(:name).present? ? session.user.name : "Anonymous"
-      .aGraph.transparent{student_code: session.code}
+      .aGraph.student.transparent{student_code: session.code}
   %a.close-reveal-modal ×
 
 
