@@ -54,7 +54,7 @@
 
   - sc = @video.sessions(current_user.id).try(:last).try(:first) || @video_session_code
   %a.button.alert.resetBtn.session_delete{data: {session_code: sc}}
-    = "Please click to Reset #{sc}"
+    = "Please click to Reset"
   %a.close-reveal-modal ×
 
 
