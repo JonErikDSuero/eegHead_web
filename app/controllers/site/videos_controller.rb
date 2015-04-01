@@ -15,10 +15,15 @@ class Site::VideosController < ApplicationController
 
   def new
     @video = Video.new
+    @courses = Course.all.map{|c| [c.complete_name, c.id]}
   end
 
   def create
-    @video = Video.new(user_params)
+    @courses = Course.all.map{|c| [c.complete_name, c.id]}
+    @video = Video.new(
+      link: params[:video][:link],
+      course_id: params[:course_id]
+    )
     if @video.save
       flash[:success] = 'Video added!'
       redirect_to videos_url

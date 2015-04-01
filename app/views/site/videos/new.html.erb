@@ -6,6 +6,7 @@
 
     <div class="row">
       <div class="large-12 columns">
+        <%= select_tag :course_id, options_for_select(@courses)%>
         <%= f.label :link %>
         <%= f.text_field :link, class: "large12.columns", required: true %>
         <div class="panel">

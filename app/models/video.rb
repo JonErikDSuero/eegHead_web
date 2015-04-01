@@ -1,6 +1,7 @@
 class Video < ActiveRecord::Base
 
   has_many :video_sessions, dependent: :destroy
+  belongs_to :course
 
   before_create :extract_code
 

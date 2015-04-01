@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :remember_token
 
+  has_and_belongs_to_many :courses
+
   before_save :downcase_email
   after_create :set_professor
 

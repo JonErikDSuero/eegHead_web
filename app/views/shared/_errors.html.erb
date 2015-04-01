@@ -4,7 +4,7 @@
       The following errors were found while submitting the form
     </div>
     <ul>
-      <% @user.errors.full_messages.each do |msg| %>
+      <% current_user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
