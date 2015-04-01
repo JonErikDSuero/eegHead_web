@@ -13,7 +13,7 @@
 
 %ul#sessions_list
   %h4 Graphs
-  - if current_user.professor? && @students_sessions.present?
+  - if current_user.professor? && @students_session_codes.present?
     %li.students
       %a.tiny.button.session{data: {reveal_id: "studentsModal"}}
         = "Previous Attention Graphs"
