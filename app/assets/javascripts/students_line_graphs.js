@@ -2,20 +2,19 @@
 var m = [50, 50, 50, 117]; // margins [top, right, bottom, left]
 var w = 854; // width
 var h = 480;// height
-var graph = {}
-
+var graphStudents = {}
 
 // initialize line_charts
-$('#graphsModal .aGraph').each( function(a_graph){
-  var wave_type = $(this).attr("wave_type");
-  graph[wave_type] = d3.select("#graphsModal .aGraph[wave_type='"+wave_type+"']").append("svg:svg")
+$('#studentsModal .aGraph').each( function(a_graph){
+  var studentCode = $(this).attr("student_code");
+  graphStudents[studentCode] = d3.select("#studentsModal .aGraph[student_code='"+studentCode+"']").append("svg:svg")
   .attr("width", w + m[1] + m[3])
   .attr("height", h + m[0] + m[2])
   .append("svg:g")
   .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 });
 
-function updateLineChart(data, wave_type){
+function updateStudentLineChart(data, studentCode){
   var video_duration = Math.trunc(youtube_player.getDuration());
 
   if (data.y_min == data.y_max) { // fix if min and max are the same
@@ -42,48 +41,32 @@ function updateLineChart(data, wave_type){
   var yAxis = d3.svg.axis().scale(y).orient("left").ticks(4);
 
   // Draw
-  graph[wave_type].append("svg:g")
+  graphStudents[studentCode].append("svg:g")
   .attr("class", "x axis")
   .attr("transform", "translate(0," + h + ")");
-  graph[wave_type].selectAll("g .x.axis").call(xAxis);
+  graphStudents[studentCode].selectAll("g .x.axis").call(xAxis);
 
-  graph[wave_type].append("svg:g")
+  graphStudents[studentCode].append("svg:g")
   .attr("class", "y axis")
   .attr("transform", "translate(-25,0)");
-  graph[wave_type].selectAll("g .y.axis").call(yAxis);
+  graphStudents[studentCode].selectAll("g .y.axis").call(yAxis);
 
-  graph[wave_type].selectAll("path").remove();
-  graph[wave_type].append("svg:path")
+  graphStudents[studentCode].selectAll("path").remove();
+  graphStudents[studentCode].append("svg:path")
   .attr('d', line(data.points));
 }
 
 //Video Sessions Buttons
-$('body').on('click', '.personal .session', function() {
-  console.log("PERSONAL!!!");
-  params = {
-    video_session_code: $(this).data('sessionCode'),
-  }
-  $.post('/v1/video_sessions/graph_points', params, function(data){
-    for (var wave_type in data){
-      console.log(wave_type);
-      console.log(data[wave_type]);
-      updateLineChart(data[wave_type], wave_type)
+$('body').on('click', '.students .session', function() {
+  $('#studentsModal .aGraph').each( function(a_graph){
+    var studentCode = $(this).attr("student_code");
+    params = {
+      video_session_code: studentCode
     }
-    $('#graphsModal #waves_graphs').show()
-  });
-});
-
-$('body').on('click', '.session_delete', function(){
-  console.log('deleting');
-  params = {
-    video_session_code: $(this).data('sessionCode'),
-  }
-  $.post('/v1/video_sessions/delete_all', params, function(data){
-    if (data.status == true){
-      location.reload();
-    } else {
-      alert('Deletion Failed');
-    }
+    $.post('/v1/video_sessions/graph_points', params, function(data){
+      updateStudentLineChart(data["attention"], studentCode);
+      $('#studentsModal #waves_graphs').show()
+    });
   });
 });
 

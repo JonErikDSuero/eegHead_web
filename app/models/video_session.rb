@@ -1,5 +1,6 @@
 class VideoSession < ActiveRecord::Base
 
+  belongs_to :user
   belongs_to :video
 
   validates_presence_of :video_id, :state, :code

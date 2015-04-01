@@ -1,5 +1,5 @@
 #player_area
-  #player{data: {video_id: @video.id, video_code: @video.code, video_session_code: @video_session_code}}
+  #player{data: {user_id: current_user.try(:id), video_id: @video.id, video_code: @video.code, video_session_code: @video_session_code}}
 
 %ul#videos_list
   %h4 Videos
@@ -13,9 +13,14 @@
 
 %ul#sessions_list
   %h4 Graphs
-  - @video.sessions.each do |s|
-    %li
-      %a.tiny.button.session{data: {session_code: s[0], reveal_id: "graphsModal"}}
+  - if current_user.professor? && @students_sessions.present?
+    %li.students
+      %a.tiny.button.session{data: {reveal_id: "studentsModal"}}
+        = "Previous Attention Graphs"
+
+  - @video.sessions(current_user.id).each do |s|
+    %li.personal
+      %a.tiny.button.session.personal{data: {session_code: s[0], reveal_id: "graphsModal"}}
         = s[1].strftime("%b %d %H:%M:%S")
       %a.tiny.secondary.button.session_delete{data: {session_code: s[0]}}
         x
@@ -29,6 +34,17 @@
       .aGraph.transparent{wave_type: wave_type}
   %a.close-reveal-modal ×
 
+
+#studentsModal.reveal-modal.transparent{"data-reveal" => ""}
+  #waves_graphs.hide
+    - @students_sessions.each do |session|
+      %h4.light
+        %span= session.try(:user).try(:name).present? ? session.user.name : "Anonymous"
+      .aGraph.transparent{student_code: session.code}
+  %a.close-reveal-modal ×
+
+
+
 %script{src: "http://www.youtube.com/player_api"}
-= javascript_include_tag 'application', 'youtube_watch', 'video_sessions_line_graphs'
+= javascript_include_tag 'application', 'youtube_watch', 'video_sessions_line_graphs', 'students_line_graphs'
 

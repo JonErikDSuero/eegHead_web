@@ -1,8 +1,10 @@
 var youtube_player;
+
+var user_id = $('#player').data('userId');
 var video_id = $('#player').data('videoId');
 var video_code = $('#player').data('videoCode');
 var video_session_code = $('#player').data('videoSessionCode');
-var replays = $('#sessions_list li').length;
+var replays = $('#sessions_list li.personal').length;
 var created_new_session = false;
 
 function onYouTubePlayerAPIReady() {
@@ -29,9 +31,10 @@ function onPlayerStateChange(event) {
     '2': 'paused',
   }
 
-  if (replays == 1) { return; } // Max number of recorded sessions
+  if (replays >= 1) { return; } // Max number of recorded sessions
 
   params = {
+    user_id: user_id,
     video_session_state: states[event.data],
     video_id: video_id,
     video_session_code: video_session_code,
@@ -51,7 +54,7 @@ function onPlayerStateChange(event) {
 
 function createNewSession(code){
   if (created_new_session) { return; }
-  buttons_html =  "<li>"
+  buttons_html =  "<li class='personal'>"
   buttons_html +=   "<a class='tiny button session' data-reveal-id='graphsModal' data-session-code="+code+"> Current </a>"
   buttons_html +=   "<a class='tiny secondary button session_delete' data-session-code="+code+"> x </a>"
   buttons_html += "</li>"

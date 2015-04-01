@@ -11,8 +11,8 @@ class Video < ActiveRecord::Base
 
   validates :link, presence: true, format: YT_LINK_FORMAT
 
-  def sessions
-    VideoSession.where(video_id: id).group(:code).pluck(:code, :created_at).uniq
+  def sessions(user_id)
+    VideoSession.where(user_id: user_id, video_id: id).group(:code).pluck(:code, :created_at).uniq
   end
 
   def extract_code

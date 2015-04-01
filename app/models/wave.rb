@@ -4,6 +4,7 @@ class Wave < ActiveRecord::Base
 
   def self.types
     {
+      attention: 'Attention (Native)',
       quality: 'Quality',
       wave0: 'Delta',
       wave1: 'High Alpha',
@@ -13,7 +14,6 @@ class Wave < ActiveRecord::Base
       wave5: 'Low Gamma',
       wave6: 'Mid Gamma',
       wave7: 'Theta',
-      attention: 'Attention (Native)',
       meditation: 'Meditation (Native)',
       blink: 'Blink (Native)',
     }
@@ -21,7 +21,6 @@ class Wave < ActiveRecord::Base
 
   def self.categorize(waves_values)
     waves = {
-      attention: waves_values[9],
       quality: waves_values[0],
       wave0: waves_values[1],
       wave1: waves_values[2],
@@ -31,6 +30,7 @@ class Wave < ActiveRecord::Base
       wave5: waves_values[6],
       wave6: waves_values[7],
       wave7: waves_values[8],
+      attention: waves_values[9],
       meditation: waves_values[10],
       blink: waves_values[11],
     }

@@ -14,8 +14,12 @@ class Site::VideosController < ApplicationController
   end
 
   def watch
+    if current_user.blank?
+      redirect_to videos_url
+    end
     @video_session_code = ((Time.now.to_i + SecureRandom.random_number)*10e6).to_i # unique
     @video = Video.find(params[:id] || 1)
+    @students_sessions = @video.video_sessions.where(state: "playing")
   end
 
   def new
